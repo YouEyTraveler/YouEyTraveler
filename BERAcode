@@ -1,0 +1,310 @@
+"""
+------------------------------------------------GENERAL SETTINGS--------------------------------------------------------
+    WALLETS_TO_WORK = 0 | Софт будет брать кошельки из таблице по правилам, описанным снизу
+    0       = все кошельки подряд
+    3       = только кошелек №3
+    4, 20   = кошелек №4 и №20
+    [[5, 25]] = кошельки с №5 по №25
+    [[5, 25], [30, 35]] = кошельки с №5 по №25 и с №30 по №30
+
+    WALLETS_TO_EXCLUDE = 0 | Софт будет исключать кошельки из таблицы по правилам, описанным снизу
+    0       = никакой кошелек не будет убран
+    3       = только кошелек №3
+    4, 20   = кошелек №4 и №20
+    [5, 25] = кошельки с №5 по №25
+    [[5, 25], [30, 35]] = кошельки с №5 по №25 и с №30 по №30
+
+    ACCOUNTS_IN_STREAM      | Количество кошельков в потоке на выполнение. Если всего 100 кошельков, а указать 10,
+                                то софт сделает 10 подходов по 10 кошельков
+
+    EXCEL_PASSWORD          | Включает запрос пароля при входе в софт. Сначала установите пароль в таблице
+    EXCEL_PAGE_NAME         | Название листа в таблице. Пример: 'BeraChain'
+
+"""
+SOFTWARE_MODE = 1               # 0 - последовательный запуск / 1 - параллельный запуск
+ACCOUNTS_IN_STREAM = 10          # Количество аккаунтов в потоке при SOFTWARE_MODE = 1
+WALLETS_TO_WORK = 0             # 0 / 3 / 3, 20 / [[3, 20]]
+WALLETS_TO_EXCLUDE = 0          # 0 / 3 / 3, 20 / [[3, 20]]
+SHUFFLE_WALLETS = 0/1         # Перемешивает кошельки перед запуском
+
+BREAK_ROUTE = False             # Прекращает выполнение маршрута, если произойдет ошибка
+SAVE_PROGRESS = True            # Включает сохранение прогресса аккаунта для Classic-routes
+TELEGRAM_NOTIFICATIONS = False  # Включает уведомления в Telegram
+
+BREAK_FAUCET = False            # Прекращает выполнение маршрута, если на кошелек не смог склеймить токены на Faucet
+MIN_BERA_AMOUNT = 1             # Количество $BERA для продолжения маршрута, если Faucet не отработал
+INFINITY_MODE = True            # Запускает в работу аккаунты по новому кругу. Позволит зациклить весь процесс работы
+
+'------------------------------------------------SLEEP CONTROL---------------------------------------------------------'
+
+SLEEP_MODE = True               # Включает сон после каждого модуля и аккаунта
+SLEEP_TIME_MODULES = (30, 60)    # (минимум, максимум) секунд | Время сна между модулями.
+SLEEP_TIME_ACCOUNTS = (20, 30)  # (минимум, максимум) секунд | Время сна между аккаунтами.
+SLEEP_TIME_FOR_NEW_RUN = (28800, 29000)  # (минимум, максимум) секунд | Время сна между повторными запусками.
+
+'------------------------------------------------RETRY CONTROL---------------------------------------------------------'
+MAXIMUM_RETRY = 20               # Количество повторений при ошибках
+SLEEP_TIME_RETRY = (5, 10)       # (минимум, максимум) секунд | Время сна после очередного повторения
+
+'-----------------------------------------------------GAS CONTROL------------------------------------------------------'
+
+GAS_CONTROL = False             # Включает контроль газа
+MAXIMUM_GWEI = 40               # Максимальный GWEI для работы софта, изменять во время работы софта в maximum_gwei.json
+SLEEP_TIME_GAS = 100            # Время очередной проверки газа
+CONTROL_TIMES_FOR_SLEEP = 5     # Количество проверок
+GAS_LIMIT_MULTIPLIER = 1.5      # Множитель газ лимита для транзакций. Поможет сэкономить на транзакциях
+GAS_PRICE_MULTIPLIER = 1.5      # Множитель цены газа для транзакций. Ускоряет выполнение или уменьшает цену транзакции
+
+'----------------------------------------------------APPROVE CONTROL---------------------------------------------------'
+UNLIMITED_APPROVE = True       # Включает безлимитный Approve для контракта
+
+'------------------------------------------------PROXY CONTROL---------------------------------------------------------'
+MAIN_PROXY = 'ete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode (https://core.telegram.org/bots/inline)
+/setinlinegeo - toggle inline location requests (https://core.telegram.org/bots/inline#location-based-results)
+/setinlinefeedback - change inline feedback (https://core.telegram.org/bots/inline#collecting-feedback) settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode (https://core.telegram.org/bots/features#privacy-mode) in groups
+
+Web Apps
+/myapps - edit your web apps (https://core.telegram.org/bots/webapps)
+/newapp - create a new web app (https://core.telegram.org/bots/webapps)
+/listapps - get a list of your web apps
+/editapp - edit a web app
+/deleteapp - delete an existing web app
+
+Games
+/mygames - edit your games (https://core.telegram.org/bots/games)
+/newgame - create a new game (https://core.telegram.org/bots/games)
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game'                  # log:pass@ip:port
+USE_PROXY = True                 # Включает использование прокси
+MOBILE_PROXY = False             # Включает использование мобильных прокси.
+MOBILE_PROXY_URL_CHANGER = [
+    '',
+    '',
+    ''
+]  # ['link1', 'link2'..] | Ссылки для смены IP. Софт пройдется по всем ссылкам, можно указать несколько прокси в Excel
+
+'------------------------------------------------SECURE DATA-----------------------------------------------------------'
+CAPTCHA_SOLVER = '2captcha'      # Сервис, через который будет решаться капча (2captcha или capmonster)
+# https://2captcha.com/enterpage
+TWO_CAPTCHA_API_KEY = "9b3eea0e1cfa080d18e0eb27a6a346b7"
+# https://capmonster.cloud
+CAP_MONSTER_API_KEY = ""
+
+# EXCEL AND GOOGLE INFO
+EXCEL_PASSWORD = False
+EXCEL_PAGE_NAME = "Berachain"
+EXCEL_FILE_PATH = "./data/accounts_data.xlsx"  # Можете не изменять, если устраивает дефолтное расположение таблицы
+
+# TELEGRAM DATA
+TG_TOKEN = "7378714408:AAEAi4jwo8C9UHQkzwvsQjQ-5egQC6SAkCI"  # https://t.me/BotFather
+TG_ID = "＠dangeshen"  # https://t.me/getmyid_bot
+
+'---------------------------------------––––––––––--MODULES SETTINGS–––––----------------------------------------------'
+
+TOTAL_DECIMALS = 6  # количество знаков после запятой для всех транзакций
+TRANSFER_ETH_AMOUNT = (0.001, 0.001)   # сумма для трансфера ETH на ваш адрес
+TRANSFER_BERA_AMOUNT = (0.001, 0.001)  # сумма для трансфера BERA на ваш адрес
+
+WRAP_BERA_AMOUNT = ('45', '50')       # количество для врапа $BERA -> $WBERA
+SWAP_HONEY_AMOUNT = ('45', '50')      # количество для свапа $BERA -> $HONEY на Bex
+SWAP_WBTC_AMOUNT = ('45', '50')       # количество для свапа $BERA -> $WBTC на Bex
+SWAP_WETH_AMOUNT = ('45', '50')       # количество для свапа $BERA -> $WETH на Bex
+SWAP_USDC_AMOUNT = ('45', '50')       # количество для свапа $BERA -> $USDC на Bex
+
+SUPPLY_WBTC_AMOUNT = ('100', '100')    # количество для supply $WBTC на Bend
+SUPPLY_WETH_AMOUNT = ('100', '100')    # количество для supply $WETH на Bend
+SUPPLY_HONEY_AMOUNT = ('100', '100')   # количество для supply $HONEY на Bend
+
+MINT_HONEY_AMOUNT = ('49', '50')       # количество $USDC для минта HONEY -> USDC на Honey
+REDEEM_HONEY_AMOUNT = ('50', '60')     # количество $HONEY для redeem USDC -> HONEY на Honey
+
+DEPOSIT_HONEY_AMOUNT = ('100', '100')   # количество $HONEY для депозита на Berps Vault
+BEX_HONEY_USDC_LIQUIDITY_AMOUNT = ('100', '100')  # количество $HONEY для добавления ликвидности на BEX
+BEX_HONEY_WBERA_LIQUIDITY_AMOUNT = ('100', '100')  # количество $HONEY для добавления ликвидности на BEX
+
+DEPOSIT_BERPS_LP_AMOUNT = ('100', '100')  # количество Berps LP для депозита на BGT Station
+
+DELEGATE_BGT_AMOUNT = ('100', '100')    # количество BGT для делегирования на BGT Station
+
+REDEEM_BGT_AMOUNT = ('100', '100')    # количество BGT для обмена на BERA (Redeem BGT for BERA)
+
+"""
+-----------------------------------------------------BRIDGE CONTROL-----------------------------------------------------
+    Проверьте руками, работает ли сеть на сайте. (Софт сам проверит, но зачем его напрягать?)
+    Не забудьте вставить API ключ для LayerSwap снизу. Для каждого моста поддерживается уникальная настройка
+
+        Arbitrum                     zkSync       
+        Arbitrum Nova                Zora             
+        Base                         Ethereum     
+        Linea                        Avalanche     
+        Manta                        BNB Chain     
+        Polygon                      Optimism            
+        Scroll                       Polygon zkEVM                                                 
+
+    Сумма в количестве  - (0.01, 0.02)
+    Сумма в процентах   - ("10", "20") ⚠️ Значения в кавычках
+
+    ACROSS_TOKEN_NAME | Укажите токен для бриджа. Поддерживаются: ETH, BNB, MATIC, USDC, USDC.e (Bridged), USDT. 
+                        Если у бриджа указано 2 токена в скобках см. BUNGEE_TOKEN_NAME, то бридж сможет делать бриджи
+                        между разными токенами. Справа от параметра, для каждого бриджа указаны доступные токены.
+
+    ACROSS_AMOUNT_LIMITER | Настройка лимитных бриджей. Указывать в $USD
+                            1 значение - это минимальный баланс на аккаунте, чтобы софт начал процесс бриджа
+                            2 значение - это мин. и макс. сумма, которая должна остаться на балансе после бриджа
+                            Если сумма для бриджа будет оставлять баланс на аккаунте больше второго значения,
+                            софт не будет пытать сделать сумму бриджа больше или меньше указанной
+
+    BUNGEE_ROUTE_TYPE | Установка своего роута для совершения транзакции, по умолчанию (0) - самый лучший. 
+                        1-Across   3-Celer     5-Stargate   7-Synapse      9-Hop
+                        2-CCTP     4-Connext   6-Socket     8-Symbiosis    10-Hyphen   
+
+"""
+
+ENABLE_BRIDGE = False           # Опция управления бриджом в модуле mint_berachain_tokens
+MIN_AMOUNT_TO_BRIDGE = 0.001    # При попытке сделать бридж меньше указанной суммы, будет вызвана ошибка
+WAIT_FOR_RECEIPT_BRIDGE = True  # Если True, будет ждать получения средств во входящей сети после бриджа
+BRIDGE_PROTOCOLS = [1, 2, 3]    # Протоколы, используемые для бриджа (1 - Across, 2 - Bungee, 3 - Relay)
+
+'--------------------------------------------------------Across--------------------------------------------------------'
+
+ACROSS_CHAIN_FROM_NAMES = ['Arbitrum', 'Optimism', 'Linea', 'Base']  # Исходящая сеть
+ACROSS_CHAIN_TO_NAMES = ['Ethereum']  # Входящая сеть
+ACROSS_BRIDGE_AMOUNT = (0.001, 0.0011)  # (минимум, максимум) (% или кол-во)
+ACROSS_TOKEN_NAME = 'ETH'
+ACROSS_AMOUNT_LIMITER = 0, (0, 0)
+
+'--------------------------------------------------------Bungee--------------------------------------------------------'
+
+BUNGEE_CHAIN_FROM_NAMES = ['Arbitrum', 'Optimism', 'Linea', 'Base']  # Исходящая сеть
+BUNGEE_CHAIN_TO_NAMES = ['Ethereum']  # Входящая сеть
+BUNGEE_BRIDGE_AMOUNT = (0.001, 0.0011)  # (минимум, максимум) (% или кол-во)
+BUNGEE_TOKEN_NAME = ('ETH', 'ETH')  # ETH, BNB, MATIC, USDC, USDC.e, USDT
+BUNGEE_ROUTE_TYPE = 0  # см. BUNGEE_ROUTE_TYPE
+BUNGEE_AMOUNT_LIMITER = 0, (0, 0)
+
+'--------------------------------------------------------Relay---------------------------------------------------------'
+
+RELAY_CHAIN_FROM_NAMES = ['Arbitrum', 'Optimism', 'Linea', 'Base']  # Исходящая сеть
+RELAY_CHAIN_TO_NAMES = ['Ethereum']  # Входящая сеть
+RELAY_BRIDGE_AMOUNT = (0.001, 0.0011)  # (минимум, максимум) (% или кол-во)
+RELAY_TOKEN_NAME = 'ETH'
+RELAY_AMOUNT_LIMITER = 0, (0, 0)
+
+"""
+-------------------------------------------------CLASSIC-ROUTES CONTROL-------------------------------------------------
+
+    mint_berachain_tokens                 # минт $BERA на BeraChain Faucet (https://bartio.faucet.berachain.com/)
+    
+    wrap_native                           # врап $BERA -> $WBERA   
+    unwrap_native                         # анврап $WBERA -> $BERA  
+    
+    swap_bera_to_btc_bex                  # свап на BEX ($BERA -> $HONEY). см. SWAP_HONEY_AMOUNT
+    swap_bera_to_eth_bex                  # свап на BEX ($BERA -> $WBTC). см. SWAP_WBTC_AMOUNT
+    swap_bera_to_honey_bex                # свап на BEX ($BERA -> $WETH). см. SWAP_WETH_AMOUNT
+    swap_bera_to_usdc_bex                 # свап на BEX ($BERA -> $USDC). см. SWAP_USDC_AMOUNT
+    
+    swap_usdc_to_bera_bex                 # свап на BEX ($HONEY -> $BERA). Свапает 100% от баланса 
+    swap_honey_to_bera_bex                # свап на BEX ($WBTC -> $BERA). Свапает 100% от баланса  
+    swap_wbtc_to_bera_bex                 # свап на BEX ($WETH -> $BERA). Свапает 100% от баланса  
+    swap_weth_to_bera_bex                 # свап на BEX ($USDC -> $BERA). Свапает 100% от баланса  
+    
+    mint_honey                            # минт $HONEY за $USDC. см. MINT_HONEY_AMOUNT
+    redeem_honey                          # продажа $HONEY за $USDC. см. REDEEM_HONEY_AMOUNT
+    supply_honey_bend                     # добавление $HONEY ликвидности на Bend. см. SUPPLY_HONEY_AMOUNT    
+    
+------------------------------------------------------BGT PREPARE-------------------------------------------------------
+    
+    supply_btc_bend                       # добавление $WBTC ликвидности на Bend. см. SUPPLY_WBTC_AMOUNT     
+    supply_eth_bend                       # добавление $WETH ликвидности на Bend. см. SUPPLY_WETH_AMOUNT
+    
+    deposit_honey_berps                   # добавление $HONEY ликвидности на Berps. см. DEPOSIT_HONEY_AMOUNT   
+    add_liquidity_bex_honey_usdc          # добавление $HONEY/$USDC ликвидности на BEX. см. BEX_HONEY_USDC_LIQUIDITY_AMOUNT          
+    add_liquidity_bex_honey_wbera         # добавление $HONEY/$WBERA ликвидности на BEX. см. BEX_HONEY_WBERA_LIQUIDITY_AMOUNT
+
+------------------------------------------------------BGT EARNINGS------------------------------------------------------
+
+    borrow_honey_bend                     # займ $HONEY на Bend, после займа получите $VDHONEY, который фармит $BGT
+    deposit_berps_lp_to_vault             # добавление $bHONEY (LP) на BGT Station из Berps. см. DEPOSIT_BERPS_LP_AMOUNT          
+    deposit_usdc_bex_lp_to_vault          # добавление $HONEY-USDC (LP) на BGT Station из BEX. Добавляет 100%          
+    deposit_wbera_bex_lp_to_vault         # добавление $HONEY-WBERA (LP) на BGT Station из BEX. Добавляет 100%      
+    
+------------------------------------------------------BGT CLAIMING------------------------------------------------------
+
+    claim_bgt_from_bex_usdc               # клейм $BGT на BGT Station за Bex (HONEY-USDC)
+    claim_bgt_from_bex_wbera              # клейм $BGT на BGT Station за Bex (hONEY-WBERA)      
+    claim_bgt_from_bend                   # клейм $BGT на BGT Station за Bend         
+    claim_bgt_from_berps                  # клейм $BGT на BGT Station за Berps
+
+------------------------------------------------------BGT DELEGATE------------------------------------------------------
+
+    delegate_bgt                          # делегирование активному валидатору на BGT Station. см. DELEGATE_BGT_AMOUNT           
+    activate_delegate_bgt                 # активация последнего делегирования на BGT Station
+    
+-------------------------------------------------------BGT REDEEM-------------------------------------------------------
+
+    redeem_bgt_for_bera                   # Обмен $BGT на $BERA на BGT Station. см. REDEEM_BGT_AMOUNT
+
+------------------------------------------------------BGT WITHDRAW------------------------------------------------------
+
+    withdraw_honey_bend                   # вывод $HONEY ликвидности из Bend
+    withdraw_btc_bend                     # вывод $WBTC ликвидности из Bend
+    withdraw_eth_bend                     # вывод $WETH ликвидности из Bend
+    
+    remove_honey_usdc_liquidity_bex       # вывод LP (HONEY-USDC) ликвидности из BEX   
+    remove_honey_wbera_liquidity_bex      # вывод LP (HONEY-WBERA) ликвидности из BEX   
+    
+    withdraw_berps_lp_from_vault          # вывод Berps LP ликвидности на BGT Station  
+    withdraw_bhoney_berps                 # запрос на вывод $bHONEY из Berps, вывод будет занимать 1-3 эпохи  
+    withdraw_bhoney_berps_finalize        # вывод $bHONEY из Berps, сначало сделайте заявку через withdraw_bhoney_berps
+    repay_honey_bend                      # погашение займа $HONEY на Bend
+    withdraw_usdc_bex_lp_from_vault       # вывод BEX LP (HONEY-USDC) ликвидности на BGT Station    
+    withdraw_wbera_bex_lp_from_vault      # вывод BEX LP (HONEY-WBERA) ликвидности на BGT Station    
+    
+    transfer_eth                          # трансфер ETH на адрес из таблицы. см. TRANSFER_ETH_AMOUNT
+    transfer_bera                         # трансфер BERA на адрес из таблицы. см. TRANSFER_BERA_AMOUNT
+    
+    Выберите необходимые модули для взаимодействия
+    Вы можете создать любой маршрут, софт отработает строго по нему. Для каждого списка будет выбран один модуль в
+    маршрут, если софт выберет None, то он пропустит данный список модулей. 
+    Список модулей сверху.
+
+    CLASSIC_ROUTES_MODULES_USING = [
+        ['mint_berachain_tokens'],
+        ['swap_usdc_bex'],
+        ['mint_honey'],
+        ...
+    ]
+"""
+
+CLASSIC_ROUTES_BLOCKS_COUNT = [4, 4]
+
+CLASSIC_ROUTES_MODULES_USING = [
+    ['mint_berachain_tokens'],
+    (
+        ['swap_bera_to_honey_bex'],
+        ['wrap_native'],
+        ['add_liquidity_bex_honey_wbera'],
+        # BeraをHoneyにスワップしてLPに足すまでのステップ。この、( )で囲まれたエリアは一つのモジュールとして認識されて、中身は順番は固定。 [ ] に囲まれたFaucetと同じ扱い
+    ),
+    (
+        ['swap_bera_to_usdc_bex'],
+        ['mint_honey'],
+        ['add_liquidity_bex_honey_usdc'],
+        # これは同じくUSDCのLPモジュール
+    ),
+    (
+        ['claim_bgt_from_bex_usdc'],
+        ['claim_bgt_from_bex_wbera'],
+        ['claim_bgt_from_berps'],
+        ['claim_bgt_from_bend'],
+        # 全部のBGTを回収してくるモジュール
+    )
+]
